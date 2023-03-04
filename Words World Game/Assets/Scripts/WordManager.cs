@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class WordLoader : MonoBehaviour
+public class WordManager : Singleton<WordManager>
 {
 	[SerializeField] private string googleSheetId = "1RY9GYaMqRN-Yp4xQZqm0e-NdsvleIiSkHa5zWCK9Dn8";
 
@@ -14,7 +15,7 @@ public class WordLoader : MonoBehaviour
 		StartCoroutine(DownloadGoogleSheet());
 	}
 
-	public IEnumerator DownloadGoogleSheet()
+	private IEnumerator DownloadGoogleSheet()
 	{
 		string url = "https://docs.google.com/spreadsheets/d/" + googleSheetId + "/export?format=csv";
 
@@ -29,16 +30,43 @@ public class WordLoader : MonoBehaviour
 
 		string text = request.downloadHandler.text;
 
-		sheetData = text.Split('\n');
-
-		foreach (var word in sheetData)
-		{
-			Debug.Log(word);
-		}
+		sheetData = text.Split("\r\n");
 	}
 
-	public string[] GetSheetData()
+	private string[] GetSheetData()
 	{
 		return sheetData;
+	}
+
+	public bool IsWorldValid(string word)
+	{
+		if (string.IsNullOrEmpty(word) && sheetData.Length == 0)
+		{
+			return false;
+		}
+
+		int min = 0;
+		int max = sheetData.Length - 1;
+
+		while (min <= max)
+		{
+			int index = (min + max)/2;
+
+			int result = string.Compare(word, sheetData[index], StringComparison.OrdinalIgnoreCase);
+
+			if (result == 0)
+			{
+				return true;
+			}
+			if (result < 0)
+			{
+				max = index - 1;
+			}
+			else
+			{
+				min = index + 1;
+			}
+		}
+		return false;
 	}
 }

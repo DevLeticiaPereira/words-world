@@ -29,8 +29,9 @@ class LetterController : MonoBehaviour
 			newWordContainer += l._letter;
 		}
 
-		Debug.Log(newWordContainer);
-		//todo: give word to someone
+		bool wordIsInTheDictionary = WordManager.Instance.IsWorldValid(newWordContainer);
+		Debug.Log("the word: " + newWordContainer);
+		Debug.Log("is in the dictionary: " + wordIsInTheDictionary);
 		_word.Clear();
 	}
 
