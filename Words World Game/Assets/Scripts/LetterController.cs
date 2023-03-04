@@ -71,7 +71,7 @@ class LetterController : MonoBehaviour
 		var wordIsInTheDictionary = WordManager.Instance.IsWorldValid(word);
 		Debug.Log("Word is in the dictionary: " + wordIsInTheDictionary);
 		_wordBeingFormedContainer.SetActive(false);
-		_wordBeingFormedText.text = word;
+		_wordBeingFormedText.text = word.ToUpper();
 		_word.Clear();
 	}
 
@@ -79,6 +79,8 @@ class LetterController : MonoBehaviour
 	{
 		_isListening = true;
 		_word.Add(letter);
+
+		_wordBeingFormedText.text = letter.Letter.ToString().ToUpper();
 	}
 
 	private void OnLetterPressed(LetterContainer letter)
@@ -88,7 +90,7 @@ class LetterController : MonoBehaviour
 
 		_word.Add(letter);
 		_wordBeingFormedContainer.SetActive(true);
-		_wordBeingFormedText.text = GetWord();
+		_wordBeingFormedText.text = GetWord().ToUpper();
 	}
 
 	private string GetWord()
