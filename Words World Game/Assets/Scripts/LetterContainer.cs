@@ -3,18 +3,19 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-class Letter : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler
+class LetterContainer : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler
 {
 	[SerializeField] private TMP_Text _letterText;
 
-	public string _letter;
+	public char Letter;
 
-	public static event Action<Letter> OnLetterPressed;
-	public static event Action<Letter> OnLetterListenBegin;
+	public static event Action<LetterContainer> OnLetterPressed;
+	public static event Action<LetterContainer> OnLetterListenBegin;
 
-	private void Awake()
+	public void SetLetter(char letter)
 	{
-		_letterText.text = _letter;
+		Letter = letter;
+		_letterText.text = Letter.ToString().ToUpper();
 	}
 
 	public void OnPointerEnter(PointerEventData eventData)

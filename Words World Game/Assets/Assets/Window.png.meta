@@ -120,13 +120,13 @@ TextureImporter:
       name: Window_0
       rect:
         serializedVersion: 2
-        x: 1017
-        y: 4067
-        width: 1000
-        height: 800
+        x: 1862
+        y: 2920
+        width: 781
+        height: 258
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 370, y: 0, z: 363, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -201,27 +201,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Window_4
-      rect:
-        serializedVersion: 2
-        x: 828
-        y: 1312
-        width: 679
-        height: 868
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1cc29c60e4e0e7043927294738aca612
-      internalID: 60273959
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Window_5
       rect:
         serializedVersion: 2
@@ -230,7 +209,7 @@ TextureImporter:
         width: 460
         height: 109
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -238,6 +217,69 @@ TextureImporter:
       bones: []
       spriteID: a752f630fa38059439448937551e699a
       internalID: 2065077175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Window_6
+      rect:
+        serializedVersion: 2
+        x: 1639
+        y: 1325
+        width: 608
+        height: 772
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 72, y: 114, z: 104, w: 97}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a13966ee187bce44db44acfb3919efd3
+      internalID: -235146095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Window_4
+      rect:
+        serializedVersion: 2
+        x: 2963
+        y: 1400
+        width: 519
+        height: 645
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 65, y: 59, z: 57, w: 60}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aedbc00993fd5bd4f9ad2b160abe44b9
+      internalID: 60273959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Window_7
+      rect:
+        serializedVersion: 2
+        x: 3036
+        y: 3552
+        width: 880
+        height: 515
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 87, y: 75, z: 93, w: 73}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40ae597938a65c045b04c0d0489f1f31
+      internalID: -348566046
       vertices: []
       indices: 
       edges: []
@@ -253,10 +295,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      Window_6: -235146095
       Window_2: -1297568458
       Window_0: 1354022342
       Window_1: -1353893846
       Window_4: 60273959
+      Window_7: -348566046
       Window_3: -1729747357
       Window_5: 2065077175
   spritePackingTag: 

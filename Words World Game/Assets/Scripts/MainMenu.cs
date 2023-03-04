@@ -1,6 +1,3 @@
-using Managers;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,7 +11,7 @@ namespace UI
         [SerializeField]
         private GameObject _mainMenuOptions;
         [SerializeField]
-        private List<Button> _levelsButtons = new List<Button>();
+        private List<Button> _levelsButtons = new();
         [SerializeField]
         private Sprite _levelButtonSprite;
         [SerializeField]
@@ -33,15 +30,8 @@ namespace UI
             for (int i = 0; i < _levelsButtons.Count; ++i)
             {
                 bool active = _gameManager.UnlockedLevels.Contains(i + 1);
-                if (active)
-                {
-                    _levelsButtons[i].gameObject.GetComponent<Image>().sprite = _levelButtonSprite;
-                }
-                else
-                {
-                    _levelsButtons[i].gameObject.GetComponent<Image>().sprite = _levelButtonBlockedSprite;
-                }
-                
+				_levelsButtons[i].gameObject.GetComponent<Image>().sprite = active ? _levelButtonSprite : _levelButtonBlockedSprite;
+
                 _levelsButtons[i].interactable = active;
                 _levelsButtons[i].gameObject.transform.GetChild(0).gameObject.SetActive(active);
             }

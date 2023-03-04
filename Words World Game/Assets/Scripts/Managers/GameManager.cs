@@ -7,16 +7,29 @@ namespace Managers
 {
 	public class GameManager : Singleton<GameManager>
 	{
-		public event Action<GameState> OnGameStateChanged;
+		[Header("Scene Names")]
+		[SerializeField] private string _gamaplaySceneName = "GameStage";
+		[SerializeField] private string _mainMenuSceneName = "MainMenu";
+		[Space]
+		[Header("Score Points")]
+		[SerializeField] private int _wordFoundInLevel = 2;
+		[SerializeField] private int _wordFoundButNotInLevel = 1;
 
 		public GameState State { get; private set; }
 		public int LastLevelCompleted { get; private set; }
 		public int Score { get; private set; }
 		public List<int> UnlockedLevels { get; } = new();
 
-		[SerializeField] private string GamaplaySceneName = "GameStage";
+		public static event Action<GameState> OnGameStateChanged;
+		public static event Action<int> OnScoreChanged;
 
-		[SerializeField] private string MainMenuSceneName = "MainMenu";
+		public enum GameState
+		{
+			MainMenu = 0,
+			LevelSelect = 1,
+			LevelStart = 2,
+			LevelCompleted = 3,
+		}
 
 		protected override void Awake()
 		{
@@ -51,8 +64,8 @@ namespace Managers
 
 		public void LoadLevel(int level)
 		{
-			if (Application.CanStreamedLevelBeLoaded(GamaplaySceneName))
-				SceneManager.LoadScene(GamaplaySceneName);
+			if (Application.CanStreamedLevelBeLoaded(_gamaplaySceneName))
+				SceneManager.LoadScene(_gamaplaySceneName);
 
 			SetupLevel(level);
 			UpdateGameState(GameState.LevelStart);
@@ -60,9 +73,9 @@ namespace Managers
 
 		public void LoadLastUnlockedLevel()
 		{
-			if (Application.CanStreamedLevelBeLoaded(GamaplaySceneName))
+			if (Application.CanStreamedLevelBeLoaded(_gamaplaySceneName))
 			{
-				SceneManager.LoadScene(GamaplaySceneName);
+				SceneManager.LoadScene(_gamaplaySceneName);
 				SetupLevel(LastLevelCompleted + 1);
 				UpdateGameState(GameState.LevelStart);
 			}
@@ -70,6 +83,12 @@ namespace Managers
 			{
 				LoadMainMenu();
 			}
+		}
+
+		public void PlayerScore(bool isWordInLevel)
+		{
+			Score += isWordInLevel ? _wordFoundInLevel : _wordFoundButNotInLevel;
+			OnScoreChanged?.Invoke(Score);
 		}
 
 		private void SetupLevel(int level)
@@ -90,17 +109,9 @@ namespace Managers
 
 		private void LoadMainMenu()
 		{
-			if (Application.CanStreamedLevelBeLoaded(MainMenuSceneName)
-				&& SceneManager.GetActiveScene().name != MainMenuSceneName)
-				SceneManager.LoadScene(MainMenuSceneName);
+			if (Application.CanStreamedLevelBeLoaded(_mainMenuSceneName)
+				&& SceneManager.GetActiveScene().name != _mainMenuSceneName)
+				SceneManager.LoadScene(_mainMenuSceneName);
 		}
-	}
-
-	public enum GameState
-	{
-		MainMenu = 0,
-		LevelSelect = 1,
-		LevelStart = 2,
-		LevelCompleted = 3,
 	}
 }
