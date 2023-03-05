@@ -1,44 +1,46 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Level", menuName = "Level")]
-public class LevelSetup : ScriptableObject
+namespace Utilities
 {
-	public int Rows { get; private set; }
-	public int Columns { get; private set; }
-
-	public char[,] CrosswordSetup;
-
-	public void InitializeArray()
+	[CreateAssetMenu(fileName = "New Level", menuName = "Level")]
+	public class LevelSetup : ScriptableObject
 	{
-		CrosswordSetup = new char[Rows, Columns];
+		[SerializeField] private int _gridRow;
+		[SerializeField] private int _gridColumn;
+		[SerializeField] private char[] _levelLetters;
+		[SerializeField] private List<WordData> _wordDatas = new();
+
+		public int GridRow => _gridRow;
+		public int GridColumn => _gridColumn;
+		public char[] LevelLetters => _levelLetters;
+		public List<WordData> WordDatas => _wordDatas;
 	}
 
-	public void ResizeArray(int newRows, int newColumns)
+	[Serializable]
+	public struct WordData
 	{
-		char[,] newArray = new char[newRows, newColumns];
-
-		for (int i = 0; i < Mathf.Min(Rows, newRows); i++)
-		{
-			for (int j = 0; j < Mathf.Min(Columns, newColumns); j++)
-			{
-				newArray[i, j] = CrosswordSetup[i, j];
-			}
-		}
-
-		Rows = newRows;
-		Columns = newColumns;
-		CrosswordSetup = newArray;
+		public List<LetterData> Word;
 	}
 
-	public HashSet<char> GetLetterInLevel()
+	[Serializable]
+	public struct LetterData
 	{
-		HashSet<char> levelLetters = new HashSet<char>();
-		foreach (var letter in CrosswordSetup)
-		{
-			levelLetters.Add(letter);
-		}
-		return levelLetters;
+		public char Letter;
+		public GridPosition LetterGridPosition;
+	}
+
+	[Serializable]
+	public struct GridPosition
+	{
+		public int Row;
+		public int Column;
+	}
+
+	public enum WordLayout
+	{
+		Horizontal,
+		Vertical,
 	}
 }

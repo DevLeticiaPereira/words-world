@@ -15,6 +15,7 @@ namespace Managers
 		[SerializeField] private int _wordFoundInLevel = 2;
 		[SerializeField] private int _wordFoundButNotInLevel = 1;
 
+
 		public GameState State { get; private set; }
 		public int LastLevelCompleted { get; private set; }
 		public int Score { get; private set; }
@@ -34,6 +35,7 @@ namespace Managers
 		protected override void Awake()
 		{
 			UnlockedLevels.Add(1);
+			base.Awake();
 		}
 
 		private void Start()
@@ -93,7 +95,7 @@ namespace Managers
 
 		private void SetupLevel(int level)
 		{
-			//todo: Ready a scriptable object that contains the level info and handle the level setup
+			LevelManager.Instance.SetupLevel(level);
 		}
 
 		private void HandleLevelCompleted()

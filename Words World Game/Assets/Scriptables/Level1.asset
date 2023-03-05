@@ -12,3 +12,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed7dc543bad047d44bc232493fa417ab, type: 3}
   m_Name: Level1
   m_EditorClassIdentifier: 
+  _gridRow: 3
+  _gridColumn: 3
+  _levelLetters: 640061006400
+  _wordDatas:
+  - Word:
+    - Letter: 68
+      LetterGridPosition:
+        Row: 0
+        Column: 0
+    - Letter: 65
+      LetterGridPosition:
+        Row: 0
+        Column: 1
+    - Letter: 68
+      LetterGridPosition:
+        Row: 0
+        Column: 2
+  - Word:
+    - Letter: 65
+      LetterGridPosition:
+        Row: 0
+        Column: 1
+    - Letter: 68
+      LetterGridPosition:
+        Row: 1
+        Column: 1
+    - Letter: 68
+      LetterGridPosition:
+        Row: 2
+        Column: 1
