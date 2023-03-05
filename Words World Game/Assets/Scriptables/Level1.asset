@@ -12,17 +12,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed7dc543bad047d44bc232493fa417ab, type: 3}
   m_Name: Level1
   m_EditorClassIdentifier: 
-  array2DChar:
-    gridSize: {x: 3, y: 3}
-    cellSize: {x: 0, y: 0}
-    cells:
-    - row: 360000000000
-    - row: 660000000000
-    - row: 000000000000
-  array2DBool:
-    gridSize: {x: 3, y: 3}
-    cellSize: {x: 16, y: 16}
-    cells:
-    - row: 000000
-    - row: 000000
-    - row: 000000
