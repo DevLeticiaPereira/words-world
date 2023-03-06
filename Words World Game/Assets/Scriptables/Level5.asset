@@ -67,20 +67,24 @@ MonoBehaviour:
       LetterGridPosition:
         Row: 4
         Column: 1
-    - Letter: 101
+    - Letter: 100
       LetterGridPosition:
         Row: 5
         Column: 1
   - Word:
-    - Letter: 0
-      LetterGridPosition:
-        Row: 5
-        Column: 0
-    - Letter: 0
+    - Letter: 100
       LetterGridPosition:
         Row: 5
         Column: 1
-    - Letter: 0
+    - Letter: 101
       LetterGridPosition:
         Row: 5
         Column: 2
+    - Letter: 97
+      LetterGridPosition:
+        Row: 5
+        Column: 3
+    - Letter: 114
+      LetterGridPosition:
+        Row: 5
+        Column: 4
