@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed7dc543bad047d44bc232493fa417ab, type: 3}
+  m_Name: Level5
+  m_EditorClassIdentifier: 
+  _gridRow: 6
+  _gridColumn: 6
+  _levelLetters: 62006500610072006400
+  _wordDatas:
+  - Word:
+    - Letter: 114
+      LetterGridPosition:
+        Row: 0
+        Column: 3
+    - Letter: 101
+      LetterGridPosition:
+        Row: 1
+        Column: 3
+    - Letter: 97
+      LetterGridPosition:
+        Row: 2
+        Column: 3
+    - Letter: 100
+      LetterGridPosition:
+        Row: 3
+        Column: 3
+  - Word:
+    - Letter: 98
+      LetterGridPosition:
+        Row: 2
+        Column: 1
+    - Letter: 101
+      LetterGridPosition:
+        Row: 2
+        Column: 2
+    - Letter: 97
+      LetterGridPosition:
+        Row: 2
+        Column: 3
+    - Letter: 114
+      LetterGridPosition:
+        Row: 2
+        Column: 4
+    - Letter: 100
+      LetterGridPosition:
+        Row: 2
+        Column: 5
+  - Word:
+    - Letter: 98
+      LetterGridPosition:
+        Row: 2
+        Column: 1
+    - Letter: 97
+      LetterGridPosition:
+        Row: 3
+        Column: 1
+    - Letter: 114
+      LetterGridPosition:
+        Row: 4
+        Column: 1
+    - Letter: 101
+      LetterGridPosition:
+        Row: 5
+        Column: 1
+  - Word:
+    - Letter: 0
+      LetterGridPosition:
+        Row: 5
+        Column: 0
+    - Letter: 0
+      LetterGridPosition:
+        Row: 5
+        Column: 1
+    - Letter: 0
+      LetterGridPosition:
+        Row: 5
+        Column: 2

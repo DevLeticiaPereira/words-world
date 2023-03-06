@@ -578,6 +578,9 @@ MonoBehaviour:
   _levelsSetup:
   - {fileID: 11400000, guid: e256a65ea31c6864c8aca7c9d447c75d, type: 2}
   - {fileID: 11400000, guid: c413e2d01e804f342852d33c69c74f3c, type: 2}
+  - {fileID: 11400000, guid: 9de043e08b27d3844b6b197c65917451, type: 2}
+  - {fileID: 11400000, guid: 0e0f82367879c9744bf2adb953145c7a, type: 2}
+  - {fileID: 11400000, guid: 8f60f6822129f7d46a4e4018be3489c2, type: 2}
   _letterPrefab: {fileID: 4517500929121861441, guid: 4a25d678e6257b34d9db6dcc63cf43f6, type: 3}
   _centerRectTransform: {fileID: 1717866038}
 --- !u!223 &2007060745

@@ -11,15 +11,25 @@ class LetterController : MonoBehaviour
 	public HashSet<LetterContainer> _word = new();
 
 	[SerializeField] private LetterContainer _letterPrefab;
-	[SerializeField] private GameObject _wordBeingFormedContainer;
 	[SerializeField] private GameObject _completedLevelWarning;
+
+	[SerializeField] private GameObject _wordBeingFormedContainer;
 	[SerializeField] private TMP_Text _wordBeingFormedText;
 	[SerializeField] private float _offsetLettersFromBorder = 50.0f;
+	[SerializeField] private LineRendererController _lineRendererController;
+	[Space]
+	[Header("Gameplay Messages")]
+	[SerializeField] private TMP_Text _gameplayMessagesText;
+	[SerializeField] private string _invalidWord = "Invalid Word";
+	[SerializeField] private string _bonusWord = "Bonus Word";
+	[SerializeField] private float _messageTimeOnScreen = 2.0f;
 
 	private bool _isListening;
+	private bool _displayingMessage;
 	private GameManager _gameManager;
 	private List<LetterContainer> _letters = new();
 	private List<string> _wordsAlreadyDiscovered = new();
+	private GameObject _gameplayMessageParentGameObject;
 
 	private void Awake()
 	{
@@ -28,6 +38,8 @@ class LetterController : MonoBehaviour
 		InputManager.OnTouchRelease += OnTouchRelease;
 		GameManager.OnGameStateChanged += OnGameStateChanged;
 		_gameManager = GameManager.Instance;
+		_gameplayMessageParentGameObject
+		= _gameplayMessagesText.gameObject.transform.parent.gameObject;
 
 		if(LevelManager.Instance.CurrentLevel != null)
 			GenerateLevelLetters(LevelManager.Instance.CurrentLevel.LevelLetters);
@@ -50,9 +62,7 @@ class LetterController : MonoBehaviour
 		}
 
 		if (gameState == GameManager.GameState.LevelCompleted)
-		{
 			StartCoroutine(DisplayCompletedLevelPopup());
-		}
 
 		_wordsAlreadyDiscovered.Clear();
 		if (_letters.Count > 0)
@@ -103,32 +113,36 @@ class LetterController : MonoBehaviour
 		_isListening = false;
 		var word = GetWord();
 
+		_lineRendererController.Clear();
 		_wordBeingFormedContainer.SetActive(false);
 		_word.Clear();
 
 		if (_wordsAlreadyDiscovered.Exists(wordAlreadyDiscovered => string.Equals
 		(wordAlreadyDiscovered, word, StringComparison.OrdinalIgnoreCase)))
-		{
 			return;
-		}
 
 		if (WordManager.Instance.IsWorldValid(word))
 		{
 			_wordsAlreadyDiscovered.Add(word);
 			bool foundWordInLevel = LevelManager.Instance.CheckForWordInLevel(word);
 			GameManager.Instance.PlayerScore(foundWordInLevel);
+			if (!foundWordInLevel)
+				StartCoroutine(DisplayGameplayMessage(_bonusWord));
 		}
 		else
 		{
-			//todo: display message word is not valid
+			StartCoroutine(DisplayGameplayMessage(_invalidWord));
 		}
 	}
 
 	private void OnLetterListenBegin(LetterContainer letter)
 	{
+		if (_displayingMessage)
+			return;
+
 		_isListening = true;
 		_word.Add(letter);
-
+		_lineRendererController.AddPointToLine(letter.gameObject.GetComponent<RectTransform>());
 		_wordBeingFormedText.text = letter.Letter.ToString().ToUpper();
 	}
 
@@ -139,6 +153,7 @@ class LetterController : MonoBehaviour
 
 		_word.Add(letter);
 		_wordBeingFormedContainer.SetActive(true);
+		_lineRendererController.AddPointToLine(letter.gameObject.GetComponent<RectTransform>());
 		_wordBeingFormedText.text = GetWord().ToUpper();
 	}
 
@@ -150,5 +165,15 @@ class LetterController : MonoBehaviour
 			word += l.Letter;
 		}
 		return word;
+	}
+
+	private IEnumerator DisplayGameplayMessage(string message)
+	{
+		_displayingMessage = true;
+		_gameplayMessagesText.text = message;
+		_gameplayMessageParentGameObject.SetActive(true);
+		yield return new WaitForSeconds(_messageTimeOnScreen);
+		_gameplayMessageParentGameObject.SetActive(false);
+		_displayingMessage = false;
 	}
 }
