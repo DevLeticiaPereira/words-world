@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4527573815173925222}
   - component: {fileID: 2036708987717349856}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: CongratulationText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 128}
+  m_AnchoredPosition: {x: 0, y: 23}
   m_SizeDelta: {x: 800, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4527573815173925222
@@ -710,7 +710,7 @@ GameObject:
   - component: {fileID: 5787076342692383846}
   - component: {fileID: 7074039694415006643}
   m_Layer: 5
-  m_Name: image (2)
+  m_Name: Tittle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -733,7 +733,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 271}
+  m_AnchoredPosition: {x: 0, y: 166}
   m_SizeDelta: {x: 448.99997, y: 92.02247}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5787076342692383846
@@ -1103,8 +1103,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 431}
-  m_SizeDelta: {x: 1148, y: 838.1}
+  m_AnchoredPosition: {x: 0, y: 343}
+  m_SizeDelta: {x: 1194.1, y: 544.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5516113772668492930
 GameObject:
@@ -1355,7 +1355,7 @@ GameObject:
   - component: {fileID: 6047659683756018312}
   - component: {fileID: 1878781865600524608}
   m_Layer: 5
-  m_Name: image (1)
+  m_Name: Tittle_background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1378,7 +1378,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 248}
+  m_AnchoredPosition: {x: 0, y: 143}
   m_SizeDelta: {x: 1281.9, y: 258.063}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6047659683756018312
@@ -1431,7 +1431,6 @@ GameObject:
   - component: {fileID: 5251655747965453115}
   - component: {fileID: 2971743202915230244}
   - component: {fileID: 1171240345270982980}
-  - component: {fileID: 4336919213670358508}
   m_Layer: 5
   m_Name: LetterController
   m_TagString: Untagged
@@ -1521,24 +1520,7 @@ MonoBehaviour:
   _gameplayMessagesText: {fileID: 1129303906688946862}
   _invalidWord: Invalid Word
   _bonusWord: Bonus Word
-  _messageTimeOnScreen: 2
---- !u!1818360610 &4336919213670358508
-ScaleConstraint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6511461907566336051}
-  m_Enabled: 1
-  m_Weight: 1
-  m_ScaleAtRest: {x: 1, y: 1, z: 1}
-  m_ScaleOffset: {x: 1, y: 1, z: 1}
-  m_AffectScalingX: 1
-  m_AffectScalingY: 1
-  m_AffectScalingZ: 1
-  m_IsContraintActive: 1
-  m_IsLocked: 1
-  m_Sources: []
+  _messageTimeOnScreen: 1.5
 --- !u!1 &6804732353120614395
 GameObject:
   m_ObjectHideFlags: 0
@@ -1617,10 +1599,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 800}
+  m_ReferenceResolution: {x: 1440, y: 2960}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
@@ -1671,7 +1653,7 @@ GameObject:
   - component: {fileID: 9071151346234407436}
   - component: {fileID: 8383460869525282708}
   m_Layer: 5
-  m_Name: image
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1694,7 +1676,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 90}
+  m_AnchoredPosition: {x: 0, y: -15}
   m_SizeDelta: {x: 950, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9071151346234407436
@@ -1726,7 +1708,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: -1297568458, guid: 7f66384179b1c0c4fbc33367be86c6c6, type: 3}
-  m_Type: 1
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1747,7 +1729,7 @@ GameObject:
   - component: {fileID: 3897893198049145249}
   - component: {fileID: 7103121472605318319}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: DescriptionText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1770,7 +1752,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 29}
+  m_AnchoredPosition: {x: 0, y: -116}
   m_SizeDelta: {x: 800, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3897893198049145249
@@ -1810,8 +1792,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278780075
-  m_fontColor: {r: 0.67058825, g: 0, b: 0.03529412, a: 1}
+    rgba: 4282991077
+  m_fontColor: {r: 0.8980393, g: 0.25490198, b: 0.28627452, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1828,10 +1810,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 56.45
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0

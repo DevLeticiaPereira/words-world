@@ -17,9 +17,10 @@ class LetterController : MonoBehaviour
 	[SerializeField] private TMP_Text _wordBeingFormedText;
 	[SerializeField] private float _offsetLettersFromBorder = 50.0f;
 	[SerializeField] private LineRendererController _lineRendererController;
-	[Space]
-	[Header("Gameplay Messages")]
-	[SerializeField] private TMP_Text _gameplayMessagesText;
+
+	[Space][Header("Gameplay Messages")][SerializeField]
+	private TMP_Text _gameplayMessagesText;
+
 	[SerializeField] private string _invalidWord = "Invalid Word";
 	[SerializeField] private string _bonusWord = "Bonus Word";
 	[SerializeField] private float _messageTimeOnScreen = 2.0f;
@@ -41,7 +42,7 @@ class LetterController : MonoBehaviour
 		_gameplayMessageParentGameObject
 		= _gameplayMessagesText.gameObject.transform.parent.gameObject;
 
-		if(LevelManager.Instance.CurrentLevel != null)
+		if (LevelManager.Instance.CurrentLevel != null)
 			GenerateLevelLetters(LevelManager.Instance.CurrentLevel.LevelLetters);
 	}
 
@@ -53,6 +54,9 @@ class LetterController : MonoBehaviour
 		GameManager.OnGameStateChanged -= OnGameStateChanged;
 	}
 
+	/// <summary>
+	/// Set up the letter controller adding and removing the level letters according to the game state.
+	/// </summary>
 	private void OnGameStateChanged(GameManager.GameState gameState)
 	{
 		if (gameState == GameManager.GameState.LevelStart)
@@ -65,12 +69,14 @@ class LetterController : MonoBehaviour
 			StartCoroutine(DisplayCompletedLevelPopup());
 
 		_wordsAlreadyDiscovered.Clear();
+
 		if (_letters.Count > 0)
 		{
 			foreach (var letter in _letters)
 			{
 				Destroy(letter.gameObject);
 			}
+
 			_letters.Clear();
 		}
 	}
@@ -79,9 +85,14 @@ class LetterController : MonoBehaviour
 	{
 		_completedLevelWarning.SetActive(true);
 		yield return new WaitForSeconds(GameManager.Instance.BetweenLevelWaitTime);
+
 		_completedLevelWarning.SetActive(false);
 	}
 
+	/// <summary>
+	/// Create the level letters that will be used in the level controller and position them
+	/// around a circle with equal space from each other.
+	/// </summary>
 	private void GenerateLevelLetters(char[] lettersToGenerate)
 	{
 		var image = GetComponent<Image>();
@@ -102,6 +113,9 @@ class LetterController : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// handles the touch release on the letter controlling reading the formed word and determinating if the word is a valid a
+	/// </summary>
 	private void OnTouchRelease()
 	{
 		if (_gameManager.State != GameManager.GameState.LevelStart)
@@ -112,15 +126,17 @@ class LetterController : MonoBehaviour
 
 		_isListening = false;
 		var word = GetWord();
-
 		_lineRendererController.Clear();
 		_wordBeingFormedContainer.SetActive(false);
 		_word.Clear();
 
+		// If the word has already been discovered, return
 		if (_wordsAlreadyDiscovered.Exists(wordAlreadyDiscovered => string.Equals
-		(wordAlreadyDiscovered, word, StringComparison.OrdinalIgnoreCase)))
+			(wordAlreadyDiscovered, word, StringComparison.OrdinalIgnoreCase)))
 			return;
 
+		// If the word is valid, add it to the list of discovered words, update the score,
+		// and display a message if necessary
 		if (WordManager.Instance.IsWorldValid(word))
 		{
 			_wordsAlreadyDiscovered.Add(word);
@@ -160,10 +176,12 @@ class LetterController : MonoBehaviour
 	private string GetWord()
 	{
 		var word = "";
+
 		foreach (var l in _word)
 		{
 			word += l.Letter;
 		}
+
 		return word;
 	}
 
@@ -173,6 +191,7 @@ class LetterController : MonoBehaviour
 		_gameplayMessagesText.text = message;
 		_gameplayMessageParentGameObject.SetActive(true);
 		yield return new WaitForSeconds(_messageTimeOnScreen);
+
 		_gameplayMessageParentGameObject.SetActive(false);
 		_displayingMessage = false;
 	}

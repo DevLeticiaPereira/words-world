@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -27,7 +28,7 @@ namespace Managers
 		public int JourneyScore { get; private set; }
 		public int Score { get; private set; }
 		public List<int> UnlockedLevels { get; } = new();
-		public float BetweenLevelWaitTime { get; private set; }
+		public float BetweenLevelWaitTime => _betweenLevelWaitTime;
 
 		private int _currentLevel;
 
@@ -40,8 +41,8 @@ namespace Managers
 
 		protected override void Awake()
 		{
-			UnlockedLevels.Add(1);
 			base.Awake();
+			UnlockedLevels.Add(1);
 		}
 
 		private void Start()
@@ -57,8 +58,6 @@ namespace Managers
 			{
 				case GameState.MainMenu:
 					LoadMainMenu();
-					break;
-				case GameState.LevelStart:
 					break;
 				case GameState.LevelCompleted:
 					HandleLevelCompleted();
@@ -137,7 +136,8 @@ namespace Managers
 		{
 			yield return new WaitForSeconds(_betweenLevelWaitTime);
 
-			SetupLevel(LastLevelCompleted + 1);
+			if(State == GameState.LevelCompleted)
+				SetupLevel(LastLevelCompleted + 1);
 		}
 
 		private void LoadMainMenu()
