@@ -28,19 +28,17 @@ namespace Managers
                     {
                         if (_hud != null)
 							Destroy(_hud);
-
-						_mainMenu = Instantiate(_mainMenuPrefab, _rectTransform);
+						if (_mainMenu == null)
+							_mainMenu = Instantiate(_mainMenuPrefab, _rectTransform);
                     }
                     break;
-                case GameManager.GameState.LevelSelect:
-                    break;
-                case GameManager.GameState.LevelStart:
+				case GameManager.GameState.LevelStart:
                     {
                         if (_mainMenu != null)
 							Destroy(_mainMenu);
-
-						_hud = Instantiate(_hudPrefab, _rectTransform);
-                    }
+						if (_hud == null)
+							_hud = Instantiate(_hudPrefab, _rectTransform);
+					}
                     break;
                 case GameManager.GameState.LevelCompleted:
                     break;

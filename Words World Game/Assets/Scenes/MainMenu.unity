@@ -201,6 +201,7 @@ MonoBehaviour:
   _mainMenuSceneName: MainMenu
   _wordFoundInLevel: 2
   _wordFoundButNotInLevel: 1
+  _betweenLevelWaitTime: 3
 --- !u!4 &443204778
 Transform:
   m_ObjectHideFlags: 0
@@ -497,7 +498,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 268}
+  m_AnchoredPosition: {x: 0, y: 320}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1876307105
@@ -576,7 +577,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelsSetup:
   - {fileID: 11400000, guid: e256a65ea31c6864c8aca7c9d447c75d, type: 2}
+  - {fileID: 11400000, guid: c413e2d01e804f342852d33c69c74f3c, type: 2}
   _letterPrefab: {fileID: 4517500929121861441, guid: 4a25d678e6257b34d9db6dcc63cf43f6, type: 3}
+  _centerRectTransform: {fileID: 1717866038}
 --- !u!223 &2007060745
 Canvas:
   m_ObjectHideFlags: 0

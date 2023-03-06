@@ -37,10 +37,4 @@ namespace Utilities
 		public int Row;
 		public int Column;
 	}
-
-	public enum WordLayout
-	{
-		Horizontal,
-		Vertical,
-	}
 }

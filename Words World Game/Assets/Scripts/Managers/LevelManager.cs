@@ -1,5 +1,6 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using Utilities;
@@ -13,23 +14,54 @@ namespace Managers
 		[SerializeField] private RectTransform _centerRectTransform;
 
 		private Dictionary<GridPosition, GameObject> _letterObjects = new();
+		public LevelSetup CurrentLevel { get; private set; }
+		public int NumberOfLevelWordDiscovered { get; private set; }
 
-		public void SetupLevel(int level)
+		protected override void Awake()
 		{
-			LevelSetup levelSetup = _levelsSetup[level - 1];
+			base.Awake();
+			GameManager.OnGameStateChanged += OnGameStateChanged;
+		}
 
-			// Loop through each letter in the level setup
-			foreach (var wordData in levelSetup.WordDatas)
+		private void OnGameStateChanged(GameManager.GameState gameState)
+		{
+			if (gameState == GameManager.GameState.LevelCompleted
+				|| gameState == GameManager.GameState.MainMenu)
+			{
+				ClearGrid();
+				NumberOfLevelWordDiscovered = 0;
+				CurrentLevel = null;
+			}
+		}
+
+		public bool SetupLevel(int level)
+		{
+			if (level>(_levelsSetup.Count))
+			{
+				return false;
+			}
+			CurrentLevel = _levelsSetup[level - 1];
+			NumberOfLevelWordDiscovered = 0;
+			CreateGrid();
+			return true;
+		}
+
+		/// <summary>
+		/// Sets up the level grid by creating letter objects on the grid and checking for conflicts.
+		/// </summary>
+		/// <param name="level">The level number to set up.</param>
+		private void CreateGrid()
+		{
+			foreach (var wordData in CurrentLevel.WordDatas)
 			{
 				foreach (var letterData in wordData.Word)
 				{
-					// Check if a letter already exists at the grid position
 					if (_letterObjects.ContainsKey(letterData.LetterGridPosition))
 					{
 						var existingLetter = _letterObjects[letterData.LetterGridPosition];
 
 						if (existingLetter.GetComponentInChildren<TMP_Text>(true).text
-						.ToCharArray()
+							.ToCharArray()
 							[0]
 							!= letterData.Letter)
 						{
@@ -40,18 +72,35 @@ namespace Managers
 					}
 					else
 					{
-						CreateNewLetterContainer(letterData,levelSetup.GridRow, levelSetup.GridColumn);
+						CreateNewLetterContainer(letterData, CurrentLevel.GridRow,
+							CurrentLevel.GridColumn);
 					}
 				}
 			}
 		}
 
-		private void CreateNewLetterContainer(LetterData letterData, int gridRow, int gridColumn)
+		private void ClearGrid()
+		{
+			foreach (var letterObject in _letterObjects)
+			{
+				Destroy(letterObject.Value);
+			}
+
+			_letterObjects.Clear();
+		}
+
+		/// <summary>
+		/// Creates a new letter object based on the given letter data and positions it on a grid layout.
+		/// </summary>
+		/// <param name="letterData">The data for the letter object to be created.</param>
+		/// <param name="gridRow">The row of the grid where the letter object should be positioned.</param>
+		/// <param name="gridColumn">The column of the grid where the letter object should be positioned.</param>
+		private void CreateNewLetterContainer(LetterData letterData, int gridRow,
+			int gridColumn)
 		{
 			var rectTransform = _letterPrefab.GetComponent<RectTransform>();
 			var rectWidth = rectTransform.rect.width;
 			var rectHeight = rectTransform.rect.height;
-
 			var position = new Vector3(
 				letterData.LetterGridPosition.Column * rectWidth,
 				-letterData.LetterGridPosition.Row * rectHeight,
@@ -59,8 +108,8 @@ namespace Managers
 			);
 
 			position -= new Vector3(
-				rectWidth * (gridColumn-1) / 2f,
-				-rectHeight * (gridRow-1) / 2f,
+				rectWidth * (gridColumn - 1) / 2f,
+				-rectHeight * (gridRow - 1) / 2f,
 				0f
 			);
 
@@ -70,6 +119,37 @@ namespace Managers
 			textComponentInChildren.text = letterData.Letter.ToString();
 			textComponentInChildren.gameObject.SetActive(false);
 			_letterObjects.Add(letterData.LetterGridPosition, letterObject);
+		}
+
+		public bool CheckForWordInLevel(string word)
+		{
+			foreach (var wordData in CurrentLevel.WordDatas)
+			{
+				string wordToCompare = GetWordFromData(wordData);
+				if (string.Equals(word, wordToCompare, StringComparison.OrdinalIgnoreCase))
+				{
+					ShowWordInScene(wordData);
+					++NumberOfLevelWordDiscovered;
+					return true;
+				}
+			}
+			return false;
+		}
+
+		private string GetWordFromData(WordData wordData)
+		{
+			return string.Join("", wordData.Word.Select(ld => ld.Letter));
+		}
+
+		private void ShowWordInScene(WordData wordData)
+		{
+			foreach (var letterData in wordData.Word)
+			{
+				if (_letterObjects.TryGetValue(letterData.LetterGridPosition, out var letterObject))
+				{
+					letterObject.GetComponentInChildren<TMP_Text>(true).gameObject.SetActive(true);
+				}
+			}
 		}
 	}
 }
