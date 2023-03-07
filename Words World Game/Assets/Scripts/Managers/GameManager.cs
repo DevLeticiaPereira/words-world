@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -36,7 +35,7 @@ namespace Managers
 		{
 			MainMenu = 0,
 			LevelStart = 1,
-			LevelCompleted = 2
+			LevelCompleted = 2,
 		}
 
 		protected override void Awake()
@@ -47,6 +46,7 @@ namespace Managers
 
 		private void Start()
 		{
+			LoadSave();
 			UpdateGameState(GameState.MainMenu);
 		}
 
@@ -104,6 +104,22 @@ namespace Managers
 				UpdateGameState(GameState.LevelCompleted);
 		}
 
+		private void LoadSave()
+		{
+			var saveData = SaveManager.Instance.LoadSaveData();
+
+			if (saveData != null)
+			{
+				JourneyScore = saveData.JourneyScore;
+				LastLevelCompleted = saveData.LastCompletedLevel;
+			}
+
+			for (int i = 1; i < LastLevelCompleted + 1; ++i)
+			{
+				UnlockedLevels.Add(i);
+			}
+		}
+
 		private void SetupLevel(int level)
 		{
 			_currentLevel = level;
@@ -121,6 +137,7 @@ namespace Managers
 		{
 			TransferScoreToJourneySocore();
 			LastLevelCompleted += 1;
+			SaveManager.Instance.SaveGameData(JourneyScore, LastLevelCompleted);
 			UnlockedLevels.Add(LastLevelCompleted + 1);
 			StartCoroutine(LevelCompleteWaitToChangeLevel());
 		}
@@ -136,7 +153,7 @@ namespace Managers
 		{
 			yield return new WaitForSeconds(_betweenLevelWaitTime);
 
-			if(State == GameState.LevelCompleted)
+			if (State == GameState.LevelCompleted)
 				SetupLevel(LastLevelCompleted + 1);
 		}
 
