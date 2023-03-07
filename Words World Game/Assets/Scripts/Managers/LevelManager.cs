@@ -24,6 +24,11 @@ namespace Managers
 			GameManager.OnGameStateChanged += OnGameStateChanged;
 		}
 
+		private void OnDestroy()
+		{
+			GameManager.OnGameStateChanged -= OnGameStateChanged;
+		}
+
 		private void OnGameStateChanged(GameManager.GameState gameState)
 		{
 			if (gameState == GameManager.GameState.LevelCompleted

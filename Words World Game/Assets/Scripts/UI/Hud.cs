@@ -1,3 +1,4 @@
+using System;
 using Managers;
 using TMPro;
 using UnityEngine;
@@ -12,6 +13,11 @@ public class Hud : MonoBehaviour
 		GameManager.OnScoreChanged += GameManagerOnOnScoreChanged;
 		_scoreText.text = GameManager.Instance.Score.ToString();
 		_journeyScoreText.text = GameManager.Instance.JourneyScore.ToString();
+	}
+
+	private void OnDestroy()
+	{
+		GameManager.OnScoreChanged -= GameManagerOnOnScoreChanged;
 	}
 
 	public void ExitToMainMenu()

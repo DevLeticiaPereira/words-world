@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Managers
@@ -18,13 +19,18 @@ namespace Managers
 			GameManager.OnGameStateChanged += GameManager_OnGameStateChanged;
 		}
 
+		protected void OnDestroy()
+		{
+			GameManager.OnGameStateChanged -= GameManager_OnGameStateChanged;
+		}
+
 		private void GameManager_OnGameStateChanged(GameManager.GameState state)
 		{
 			switch (state)
 			{
 				case GameManager.GameState.MainMenu:
 				{
-					if (_hud != null)
+					if (_hud  != null)
 						Destroy(_hud.gameObject);
 
 					if (_mainMenu == null)
@@ -38,7 +44,7 @@ namespace Managers
 						Destroy(_mainMenu.gameObject);
 
 					if (_hud == null)
-						_hud = Instantiate(_hudPrefab, _rectTransform);
+						_hud = Instantiate(_hudPrefab,_rectTransform);
 				}
 
 					break;
