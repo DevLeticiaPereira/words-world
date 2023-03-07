@@ -26,7 +26,6 @@ namespace Managers
 		public int LastLevelCompleted { get; private set; }
 		public int JourneyScore { get; private set; }
 		public int Score { get; private set; }
-		public List<int> UnlockedLevels { get; } = new();
 		public float BetweenLevelWaitTime => _betweenLevelWaitTime;
 
 		private int _currentLevel;
@@ -36,12 +35,6 @@ namespace Managers
 			MainMenu = 0,
 			LevelStart = 1,
 			LevelCompleted = 2,
-		}
-
-		protected override void Awake()
-		{
-			base.Awake();
-			UnlockedLevels.Add(1);
 		}
 
 		private void Start()
@@ -106,8 +99,6 @@ namespace Managers
 
 		public void StartNewGame()
 		{
-			UnlockedLevels.Clear();
-			UnlockedLevels.Add(1);
 			LastLevelCompleted = 0;
 			JourneyScore = 0;
 			Score = 0;
@@ -123,11 +114,6 @@ namespace Managers
 			{
 				JourneyScore = saveData.JourneyScore;
 				LastLevelCompleted = saveData.LastCompletedLevel;
-			}
-
-			for (int i = 1; i < LastLevelCompleted + 1; ++i)
-			{
-				UnlockedLevels.Add(i);
 			}
 		}
 
@@ -149,7 +135,6 @@ namespace Managers
 			TransferScoreToJourneySocore();
 			LastLevelCompleted += 1;
 			SaveManager.Instance.SaveGameData(JourneyScore, LastLevelCompleted);
-			UnlockedLevels.Add(LastLevelCompleted + 1);
 			StartCoroutine(LevelCompleteWaitToChangeLevel());
 		}
 
