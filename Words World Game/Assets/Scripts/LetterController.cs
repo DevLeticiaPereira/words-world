@@ -153,23 +153,28 @@ class LetterController : MonoBehaviour
 
 	private void OnLetterListenBegin(LetterContainer letter)
 	{
-		if (_displayingMessage)
+		if (_displayingMessage )
 			return;
 
 		_isListening = true;
 		_word.Add(letter);
-		_lineRendererController.AddPointToLine(letter.gameObject.GetComponent<RectTransform>());
+		AddPointToLineRenderer();
 		_wordBeingFormedText.text = letter.Letter.ToString().ToUpper();
+	}
+
+	private void AddPointToLineRenderer()
+	{
+		_lineRendererController.AddPointToLine();
 	}
 
 	private void OnLetterPressed(LetterContainer letter)
 	{
-		if (!_isListening)
+		if (!_isListening|| _word.Contains(letter))
 			return;
 
 		_word.Add(letter);
 		_wordBeingFormedContainer.SetActive(true);
-		_lineRendererController.AddPointToLine(letter.gameObject.GetComponent<RectTransform>());
+		AddPointToLineRenderer();
 		_wordBeingFormedText.text = GetWord().ToUpper();
 	}
 
