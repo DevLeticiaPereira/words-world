@@ -124,6 +124,9 @@ MonoBehaviour:
   - {fileID: 1283313663593487349}
   _levelButtonSprite: {fileID: 1039237031, guid: a43b5090b6fdc7b4dbb5348d57b0eb3e, type: 3}
   _levelButtonBlockedSprite: {fileID: 2106858729, guid: a43b5090b6fdc7b4dbb5348d57b0eb3e, type: 3}
+  _startButton: {fileID: 1283313664354841878}
+  _start: START
+  _newGame: NEW GAME
 --- !u!1 &1283313662529294444
 GameObject:
   m_ObjectHideFlags: 0
@@ -1108,7 +1111,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1283313663582623828}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1206,7 +1209,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3601480133591768706}
         m_TargetAssemblyTypeName: UI.MainMenu, Assembly-CSharp
-        m_MethodName: LoadCurrentLevel
+        m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1788,10 +1791,10 @@ RectTransform:
   m_Father: {fileID: 1283313662431096984}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -1}
-  m_SizeDelta: {x: 1440, y: 2966}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1283313664238872528
 CanvasRenderer:

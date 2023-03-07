@@ -1431,6 +1431,7 @@ GameObject:
   - component: {fileID: 5251655747965453115}
   - component: {fileID: 2971743202915230244}
   - component: {fileID: 1171240345270982980}
+  - component: {fileID: 5124113384581120423}
   m_Layer: 5
   m_Name: LetterController
   m_TagString: Untagged
@@ -1521,6 +1522,23 @@ MonoBehaviour:
   _invalidWord: Invalid Word
   _bonusWord: Bonus Word
   _messageTimeOnScreen: 1.5
+--- !u!1818360610 &5124113384581120423
+ScaleConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6511461907566336051}
+  m_Enabled: 1
+  m_Weight: 0.54
+  m_ScaleAtRest: {x: 1, y: 1, z: 1}
+  m_ScaleOffset: {x: 1, y: 1, z: 1}
+  m_AffectScalingX: 1
+  m_AffectScalingY: 1
+  m_AffectScalingZ: 1
+  m_IsContraintActive: 0
+  m_IsLocked: 0
+  m_Sources: []
 --- !u!1 &6804732353120614395
 GameObject:
   m_ObjectHideFlags: 0

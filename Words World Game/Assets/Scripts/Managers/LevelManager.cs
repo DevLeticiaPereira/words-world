@@ -16,6 +16,7 @@ namespace Managers
 		private Dictionary<GridPosition, GameObject> _letterObjects = new();
 		public LevelSetup CurrentLevel { get; private set; }
 		public int NumberOfLevelWordDiscovered { get; private set; }
+		public int TotalNumberOfLevels => _levelsSetup.Count;
 
 		protected override void Awake()
 		{

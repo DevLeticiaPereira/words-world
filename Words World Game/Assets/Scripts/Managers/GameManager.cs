@@ -104,6 +104,17 @@ namespace Managers
 				UpdateGameState(GameState.LevelCompleted);
 		}
 
+		public void StartNewGame()
+		{
+			UnlockedLevels.Clear();
+			UnlockedLevels.Add(1);
+			LastLevelCompleted = 0;
+			JourneyScore = 0;
+			Score = 0;
+			SaveManager.Instance.SaveGameData(JourneyScore,LastLevelCompleted);
+			LoadLastUnlockedLevel();
+
+		}
 		private void LoadSave()
 		{
 			var saveData = SaveManager.Instance.LoadSaveData();

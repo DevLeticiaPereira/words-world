@@ -1,56 +1,74 @@
 using System.Collections.Generic;
+using Managers;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI
 {
-    public class MainMenu : MonoBehaviour
-    {
-        [SerializeField]
-        private GameObject _levelSelection;
-        [SerializeField]
-        private GameObject _mainMenuOptions;
-        [SerializeField]
-        private List<Button> _levelsButtons = new();
-        [SerializeField]
-        private Sprite _levelButtonSprite;
-        [SerializeField]
-        private Sprite _levelButtonBlockedSprite;
+	public class MainMenu : MonoBehaviour
+	{
+		[Header("Menu Windows")]
+		[SerializeField] private GameObject _levelSelection;
+		[SerializeField] private GameObject _mainMenuOptions;
+		[Header("Level Selection")]
+		[SerializeField] private List<Button> _levelsButtons = new();
+		[SerializeField] private Sprite _levelButtonSprite;
+		[SerializeField] private Sprite _levelButtonBlockedSprite;
+		[Space]
+		[Header("Button Start")]
+		[SerializeField] private TMP_Text _startButton;
+		[SerializeField] private string _start = "START";
+		[SerializeField] private string _newGame = "NEW GAME";
 
-        private Managers.GameManager _gameManager;
+		private GameManager _gameManager;
 
-        private void Awake()
-        {
-            _gameManager = Managers.GameManager.Instance;
-            UpdateLevelButtonsState();
-        }
+		private void Awake()
+		{
+			_gameManager = GameManager.Instance;
+			UpdateLevelButtonsState();
 
-        private void UpdateLevelButtonsState()
-        {
-            for (int i = 0; i < _levelsButtons.Count; ++i)
-            {
-                bool active = _gameManager.UnlockedLevels.Contains(i + 1);
-				_levelsButtons[i].gameObject.GetComponent<Image>().sprite = active ? _levelButtonSprite : _levelButtonBlockedSprite;
+			if (_gameManager.LastLevelCompleted
+				== LevelManager.Instance.TotalNumberOfLevels)
+				_startButton.text = _newGame;
+			else
+				_startButton.text = _start;
+		}
 
-                _levelsButtons[i].interactable = active;
-                _levelsButtons[i].gameObject.transform.GetChild(0).gameObject.SetActive(active);
-            }
-        }
+		public void SelectLevel(int level)
+		{
+			_gameManager.LoadLevel(level);
+		}
 
-        public void SelectLevel(int level)
-        {
-            _gameManager.LoadLevel(level);
-        }
+		public void StartGame()
+		{
+			if (_startButton.text == _start)
+			{
+				_gameManager.LoadLastUnlockedLevel();
+			}
+			else if (_startButton.text == _newGame)
+			{
+				_gameManager.StartNewGame();
+			}
+		}
 
-        public void LoadCurrentLevel()
-        {
-            _gameManager.LoadLastUnlockedLevel();
-        }
+		public void ShowLevelSelectionWindow(bool show)
+		{
+			_levelSelection.SetActive(show);
+			_mainMenuOptions.SetActive(!show);
+		}
 
-        public void ShowLevelSelectionWindow(bool show)
-        {
-            _levelSelection.SetActive(show);
-            _mainMenuOptions.SetActive(!show);
-        }
-    }
+		private void UpdateLevelButtonsState()
+		{
+			for (var i = 0; i < _levelsButtons.Count; ++i)
+			{
+				var active = _gameManager.UnlockedLevels.Contains(i + 1);
+				_levelsButtons[i].gameObject.GetComponent<Image>().sprite
+				= active ? _levelButtonSprite : _levelButtonBlockedSprite;
+
+				_levelsButtons[i].interactable = active;
+				_levelsButtons[i].gameObject.transform.GetChild(0).gameObject.SetActive(active);
+			}
+		}
+	}
 }
