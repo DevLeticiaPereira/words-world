@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4992735011822439688}
   - component: {fileID: 9219962668940291872}
   - component: {fileID: 4618631288203601232}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LineRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,9 +76,9 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1556257761
+  m_SortingLayer: 1
+  m_SortingOrder: -1
   m_Positions: []
   m_Parameters:
     serializedVersion: 3

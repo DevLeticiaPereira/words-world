@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 class LetterController : MonoBehaviour
 {
-	public HashSet<LetterContainer> _word = new();
+	public List<LetterContainer> _word = new();
 
 	[SerializeField] private LetterContainer _letterPrefab;
 	[SerializeField] private GameObject _completedLevelWarning;
@@ -124,11 +124,8 @@ class LetterController : MonoBehaviour
 		if (!_isListening)
 			return;
 
-		_isListening = false;
 		var word = GetWord();
-		_lineRendererController.Clear();
-		_wordBeingFormedContainer.SetActive(false);
-		_word.Clear();
+		ResetWordFormation();
 
 		// If the word has already been discovered, return
 		if (_wordsAlreadyDiscovered.Exists(wordAlreadyDiscovered => string.Equals
@@ -158,27 +155,56 @@ class LetterController : MonoBehaviour
 
 		_isListening = true;
 		_word.Add(letter);
-		AddPointToLineRenderer();
+		AddPointToLineRenderer(letter.gameObject.transform);
 		_wordBeingFormedText.text = letter.Letter.ToString().ToUpper();
 	}
 
-	private void AddPointToLineRenderer()
+	private void AddPointToLineRenderer(Transform letterTransform)
 	{
-		_lineRendererController.AddPointToLine();
+		_lineRendererController.AddPointToLine(letterTransform);
 	}
 
 	private void OnLetterPressed(LetterContainer letter)
 	{
-		if (!_isListening|| _word.Contains(letter))
+		if (!_isListening)
 			return;
+
+        if (_word.Contains(letter))
+        {
+            if (_word[_word.Count-1] == letter)
+            {
+				_word.Remove(letter);
+				_lineRendererController.RemoveLastFixedPoint();
+				_wordBeingFormedText.text = "";
+                foreach (var letterInWord in _word)
+                {
+					_wordBeingFormedText.text += letterInWord.Letter.ToString().ToUpper();
+				}
+				
+				//if all letters was removed cancel current word formation
+                if (_word.Count == 0)
+                {
+                    ResetWordFormation();
+                }
+            }
+			return;
+        }
 
 		_word.Add(letter);
 		_wordBeingFormedContainer.SetActive(true);
-		AddPointToLineRenderer();
+		AddPointToLineRenderer(letter.gameObject.transform);
 		_wordBeingFormedText.text = GetWord().ToUpper();
 	}
 
-	private string GetWord()
+    private void ResetWordFormation()
+    {
+        _isListening = false;
+        _wordBeingFormedContainer.SetActive(false);
+        _lineRendererController.Clear();
+		_word.Clear();
+	}
+
+    private string GetWord()
 	{
 		var word = "";
 

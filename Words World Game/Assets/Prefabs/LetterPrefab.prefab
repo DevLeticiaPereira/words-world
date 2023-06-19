@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7010812709174918514}
   - component: {fileID: 661490248031475332}
   - component: {fileID: 1435803640748096160}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 4926703839136518741}
   - component: {fileID: 7943382688946207229}
   - component: {fileID: 7891091123207511553}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: LetterPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
